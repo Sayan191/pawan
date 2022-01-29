@@ -42,8 +42,15 @@ const Login = () => {
     }
   }
 
+//   const loggedIn = () =>{
+//     if(isLoggedIn()){
+//       return <Navigate to="/planningpoker" />
+//     }
+// }
+
   return (
-    <Fragment>
+    <Fragment >
+      {/* {loggedIn()} */}
       <Navbar/>
       <Grid>
         <Paper elevation={10} style={paperStyle}>

@@ -21,7 +21,7 @@ export const isLoggedIn = () =>{
     if (typeof window === "undefined"){
         return false
     }
-    if (localStorage.getItem("jwt")){
+    if (localStorage.getItem("data")){
         return true
     }
     else{

@@ -1,27 +1,60 @@
 const Teams = require('../Models/Teams');
-const Team = require('../Models/Teams');
+var jwt = require('jsonwebtoken')
 
-exports.login = (req, res) => {
+
+exports.check = (req, res,next) => {
     const { user,teamName,manager } = req.body;
-    
-    Team.findOne({teamName},(err,team)=>{
-
+    Teams.findOne({team:teamName},(err,team)=>{
         //if team doesnt exist...............
-        if(err){
-            const team1 = new Team(req.body);
+        console.log(err,team)
+        if(err==null){
+            const team1 = new Teams(req.body);
             team1.save((err,team)=>{
                 if(err){
-                    return res.status(400).json({
+                    return res.status(404).json({
                         error:"NOT able to save user in Database"
                     });
                 }
-                res.json({
-                    user: team.user,
-                    name : teamName,
-                    manager: team.manager
-                }); 
+                console.log(team)
             })
         };
     });
+    next();
+}
+
+exports.login= (req,res) =>{
+    const { user,teamName,manager } = req.body;
+    Teams.findOne({teamName},(err,team)=>{
+
+        if(err  || team==null){
+            return res.status(400).json({
+                err:"aerror"
+            });
+        }
+
+        // creating login session..................
+        console.log(team)
+        //generating JWT token
+        const token = jwt.sign({teamName:team.teamName},"Pawan");
+        //put in the cookie
+        res.cookie("token",token,{expire: new Date() +9999});
+        
+        const{user, teamName, manager} = team;
+        res.json({
+            token,
+            teamDetails:{
+                name: user,
+                team:teamName,
+                manager:manager
+            }
+        }); 
+    });
     
+}
+
+exports.signout =(req,res) =>{
+    res.clearCookie("token")
+    return res.send({
+        Msg: "Session Ended"
+    });
 }

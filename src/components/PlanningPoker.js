@@ -11,7 +11,7 @@ const PlanningPoker = () =>{
     return(
         <>
             <Navbar />
-            {isAuthenticated() && isAuthenticated().teamDetails.Navbarmanager == true && 
+            {isAuthenticated() && isAuthenticated().teamDetails.manager == true && 
                 <Manager />   
             }
             {isAuthenticated() && isAuthenticated().teamDetails.manager == false && 

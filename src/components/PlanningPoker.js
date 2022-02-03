@@ -6,15 +6,15 @@ import Member from "./pages/Member";
 
 const PlanningPoker = () =>{
     
-    const {name,team} = isAuthenticated();
+    const {user,teamName,manager} = isAuthenticated().teamDetails;
 
     return(
         <>
             <Navbar />
-            {isAuthenticated() && isAuthenticated().manager == true && 
+            {isAuthenticated() && isAuthenticated().teamDetails.Navbarmanager == true && 
                 <Manager />   
             }
-            {isAuthenticated() && isAuthenticated().manager == false && 
+            {isAuthenticated() && isAuthenticated().teamDetails.manager == false && 
                 <Member />            
             }
         </>    

@@ -1,3 +1,21 @@
+
+export const loginIn = data =>{
+    return fetch('http://localhost:8000/api/login',{
+        method:"POST",
+        headers:{
+            Accept : "*/*",
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify(data)
+    }).then(response =>{
+        console.log(response)
+        return response.json()
+    }).catch(error =>{
+        console.log(error)
+    })
+}
+
+
 export const authenticate = (data, next) =>{
     if(typeof window !== "undefined"){
         localStorage.setItem("data",JSON.stringify(data))
@@ -34,4 +52,11 @@ export const endSession = next =>{
         localStorage.removeItem("data")
         next()
     }
+    return fetch("http://localhost:8000/api/logout",{
+        method:"GET"
+    }).then(response =>{
+        return response.json()
+    }).catch(error =>{
+        console.log(error)
+    });
 }

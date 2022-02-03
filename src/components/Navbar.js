@@ -43,7 +43,7 @@ export default function Navbar({history}) {
                           </Button>
                         </Box>
            } 
-            {isAuthenticated() && isAuthenticated().manager == true && <>
+            {isAuthenticated() && isAuthenticated().teamDetails.manager == true && <>
               {/* navbar for project manager */}
               <Box
                           sx={{
@@ -65,7 +65,7 @@ export default function Navbar({history}) {
                         </Box>
             </>
             }
-            {isAuthenticated() && isAuthenticated().manager == false && <>
+            {isAuthenticated() && isAuthenticated().teamDetails.manager == false && <>
               {/* navbar for member */}
                         <Box
                           sx={{

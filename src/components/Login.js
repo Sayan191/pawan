@@ -4,7 +4,7 @@ import { Grid, Paper, TextField, Button } from "@material-ui/core";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import { Box } from "@material-ui/core";
-import { authenticate, isLoggedIn } from "./helper/helper";
+import { authenticate, isLoggedIn, loginIn } from "./helper/helper";
 import Navbar from "./Navbar";
 
 
@@ -19,15 +19,15 @@ const Login = () => {
   const btnstyle = { margin: "8px 0" };
 
   const [values,setValue] = useState({
-    name: "",
-    team: "",
+    user: "",
+    teamName: "",
     manager: false,
     redirect:false
   });
   
   const [checked, setChecked] = useState(false);
 
-  const {name,team,manager,redirect} =values;
+  const {user,teamName,manager,redirect} =values;
   
   const handleChange = name => event=>{
     setValue({...values, [event.target.name]: event.target.value})
@@ -72,21 +72,21 @@ const Login = () => {
             label="Smart Login"
           />
           <TextField
-            onChange={handleChange("name")}
+            onChange={handleChange("user")}
             required
             label="First name"
-            name="name"
+            name="user"
             placeholder="First name"
             fullWidth
-            value={name}
+            value={user}
           />
           <TextField
-            onChange={handleChange("team")}
+            onChange={handleChange("teamName")}
             label="Team name"
-            name="team"
+            name="teamName"
             placeholder="Team name"
             fullWidth
-            value={team}
+            value={teamName}
           />
 
           <Button
@@ -99,14 +99,17 @@ const Login = () => {
             halfWidth
             onClick={(e)=>{
               e.preventDefault();
-              authenticate({name,team,manager}, ()=>{
-                setValue({
-                  name:"",
-                  team:"",
-                  manager: false,
-                  redirect:true
+              loginIn({user,teamName,manager}).then( data =>{
+                console.log(data)
+                authenticate(data, ()=>{
+                  setValue({
+                    user:"",
+                    teamName:"",
+                    manager: false,
+                    redirect:true
+                  })
                 })
-              })
+              }).catch(err=> console.log(err))
             }}
           >
             JOIN SESSION

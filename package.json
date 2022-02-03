@@ -9,6 +9,7 @@
     "lint": "eslint ./index.js  ./src/components/**/*.js",
     "lint:fix": "eslint  --fix ./index.js ./src/components/**/*.js "
   },
+  "proxy": "http://localhost:8000/api",
   "keywords": [
     "webpack-react"
   ],

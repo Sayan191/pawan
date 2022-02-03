@@ -4,18 +4,19 @@ var jwt = require('jsonwebtoken')
 
 exports.check = (req, res,next) => {
     const { user,teamName,manager } = req.body;
-    Teams.findOne({team:teamName},(err,team)=>{
+    console.log(teamName);
+    Teams.findOne({'teamName':teamName},(err,team)=>{
         //if team doesnt exist...............
         console.log(err,team)
-        if(err==null){
+        if(err==null || err){
             const team1 = new Teams(req.body);
-            team1.save((err,team)=>{
+            team1.save((err,teamN)=>{
                 if(err){
                     return res.status(404).json({
                         error:"NOT able to save user in Database"
                     });
                 }
-                console.log(team)
+                console.log(teamN)
             })
         };
     });
@@ -24,8 +25,8 @@ exports.check = (req, res,next) => {
 
 exports.login= (req,res) =>{
     const { user,teamName,manager } = req.body;
-    Teams.findOne({teamName},(err,team)=>{
-
+    Teams.findOne({'teamName':teamName},(err,team)=>{
+        console.log(err,team)
         if(err  || team==null){
             return res.status(400).json({
                 err:"aerror"

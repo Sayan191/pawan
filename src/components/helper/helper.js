@@ -50,6 +50,7 @@ export const isLoggedIn = () =>{
 export const endSession = next =>{
     if(typeof window !== "undefined"){
         localStorage.removeItem("data")
+        localStorage.removeItem("days")
         next()
     }
     return fetch("http://localhost:8000/api/logout",{
@@ -59,4 +60,12 @@ export const endSession = next =>{
     }).catch(error =>{
         console.log(error)
     });
+}
+
+export const settingDays = (days,next) =>{
+    if(localStorage.getItem("days") || !localStorage.getItem("days")){
+        console.log("helper",days);
+        localStorage.setItem("days",JSON.stringify(days));
+        next()
+    }
 }

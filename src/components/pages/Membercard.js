@@ -27,7 +27,6 @@ export default function SimplePaper() {
           <b> Planning Porker</b>
         </Typography>
       </Paper>
-      
     </Box>
   );
 }

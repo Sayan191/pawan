@@ -7,8 +7,8 @@ import StoryPoints from "./pages/StoryPoints"
 
 const PlanningPoker = () =>{
     
-    const {user,teamName,manager} = isAuthenticated().teamDetails;
     const [showContent, setShowContent] = useState(false);
+    const [showDays , setShowDays] = useState("");
 
     console.log(showContent)
 

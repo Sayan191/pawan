@@ -1,11 +1,11 @@
 import React from "react";
-
-const Manager = () =>{
-    return(
-        <>
-            <h1>Mai h manager</h1>
-        </>
-    )
-}
+import Membercard from "./Membercard";
+const Manager = () => {
+  return (
+    <>
+      <Membercard />
+    </>
+  );
+};
 
 export default Manager;

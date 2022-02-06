@@ -1,11 +1,11 @@
 import React from "react";
-
-const Member = () =>{
-    return(
-        <>
-            <h1>Mai nai h manager</h1>
-        </>
-    )
-}
+import Membercard from "./Membercard";
+const Member = () => {
+  return (
+    <>
+      <Membercard />
+    </>
+  );
+};
 
 export default Member;

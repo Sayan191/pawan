@@ -13,7 +13,7 @@ const PlanningPoker = () =>{
     const [showContent, setShowContent] = useState(false);
     const [showSelection,setShowSelection] = useState(false);    
     const [Selection,setSelection] = useState(false);    
-    const [days,setDays] = useState("");
+    const [days,setDays] = useState();
     
     //setDays(getDays());
     if(showSelection){

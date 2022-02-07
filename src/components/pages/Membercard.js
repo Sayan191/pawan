@@ -6,13 +6,6 @@ import {getDays} from "../helper/helper";
 
 export default function SimplePaper() {
 
-  const [days,setDays] = useState("");
-
-  const loadDays = ()=>{
-    setDays({days:getDays()});
-  }
-  
-
   return (
     <Box
       sx={{
@@ -34,8 +27,7 @@ export default function SimplePaper() {
     >
       <Paper elevation={18}>
         <Typography sx={{ fontSize: 22 }} color="text.secondary" gutterBottom>
-          {!showSelection && <b> Planning Porker</b>}
-          {showSelection && loadDays() && <b> {days}</b>}
+           <b> Planning Porker</b>
         </Typography>
       </Paper>
     </Box>

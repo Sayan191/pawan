@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Navbar({setShowContent= f=> f, showContent=undefined}) {
+export default function Navbar({setShowContent= f=> f, showContent=undefined, showSelection=undefined ,setShowSelection=f=>f}) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -71,8 +71,22 @@ export default function Navbar({setShowContent= f=> f, showContent=undefined}) {
                       >
                         New Session
                       </Button>
-                      <Button href="/">Show Selection</Button>
-                      <Button onClick={() => {setShowContent(!showContent)}}>Story Points</Button>
+                      
+                      <Button 
+                          onClick={() => {
+                            setShowSelection(!showSelection)
+                          }}
+                      >
+                        Show Selection
+                      </Button>
+                      
+                      <Button 
+                          onClick={() => {
+                            setShowContent(!showContent)
+                          }}
+                        >
+                          Story Points
+                      </Button>
                     </ButtonGroup>
                   </Box>
                   <Box

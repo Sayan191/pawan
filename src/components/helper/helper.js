@@ -62,10 +62,8 @@ export const endSession = next =>{
     });
 }
 
-export const settingDays = (days,next) =>{
-    if(localStorage.getItem("days") || !localStorage.getItem("days")){
-        console.log("helper",days);
-        localStorage.setItem("days",JSON.stringify(days));
-        next()
+export const getDays = () =>{
+    if(localStorage.getItem("days")){
+        return localStorage.getItem("days")
     }
 }

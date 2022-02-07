@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import Paper from "@material-ui/core/Paper";
 import { Box } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
+import {getDays} from "../helper/helper";
+
 export default function SimplePaper() {
+
+  const [days,setDays] = useState("");
+
+  const loadDays = ()=>{
+    setDays({days:getDays()});
+  }
+  
+
   return (
     <Box
       sx={{
@@ -24,7 +34,8 @@ export default function SimplePaper() {
     >
       <Paper elevation={18}>
         <Typography sx={{ fontSize: 22 }} color="text.secondary" gutterBottom>
-          <b> Planning Porker</b>
+          {!showSelection && <b> Planning Porker</b>}
+          {showSelection && loadDays() && <b> {days}</b>}
         </Typography>
       </Paper>
     </Box>

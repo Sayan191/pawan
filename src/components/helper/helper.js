@@ -50,7 +50,7 @@ export const isLoggedIn = () =>{
 export const endSession = next =>{
     if(typeof window !== "undefined"){
         localStorage.removeItem("data")
-        localStorage.removeItem("days")
+        localStorage.removeItem("points")
         next()
     }
     return fetch("http://localhost:8000/api/logout",{
@@ -62,8 +62,15 @@ export const endSession = next =>{
     });
 }
 
-export const getDays = () =>{
-    if(localStorage.getItem("days")){
-        return localStorage.getItem("days")
+export const getPoints = () =>{
+    if(localStorage.getItem("points")){
+        return localStorage.getItem("points")
+    }
+}
+
+export const removePoinyts = next =>{
+    if(localStorage.getItem("points")){
+        localStorage.removeItem("points")
+        next()
     }
 }

@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { Box } from "@material-ui/core";
-import { endSession, isAuthenticated } from "./helper/helper";
+import { endSession, isAuthenticated, removePoinyts } from "./helper/helper";
 
 
 // import { Grid } from "@mui/material";
@@ -20,6 +20,8 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
 }));
+
+const {team} = isAuthenticated().teamDetails;
 
 export default function Navbar({setShowContent= f=> f, showContent=undefined, showSelection=undefined ,setShowSelection=f=>f}) {
   const classes = useStyles();
@@ -63,15 +65,17 @@ export default function Navbar({setShowContent= f=> f, showContent=undefined, sh
                     }}
                   >
                     <ButtonGroup variant="text" aria-label="text button group">
+                      {/* New Session */}
                       <Button
                         href="/"
                         onClick={() => {
-                          endSession();
+                          removePoinyts();
                         }}
                       >
                         New Session
                       </Button>
-                      
+
+                      {/* Show Selection */}
                       <Button 
                           onClick={() => {
                             setShowSelection(!showSelection)
@@ -79,7 +83,8 @@ export default function Navbar({setShowContent= f=> f, showContent=undefined, sh
                       >
                         Show Selection
                       </Button>
-                      
+
+                      {/* Story POints */}
                       <Button 
                           onClick={() => {
                             setShowContent(!showContent)
@@ -87,8 +92,10 @@ export default function Navbar({setShowContent= f=> f, showContent=undefined, sh
                         >
                           Story Points
                       </Button>
+
                     </ButtonGroup>
                   </Box>
+
                   <Box
                     sx={{
                       display: "flex",
@@ -101,15 +108,26 @@ export default function Navbar({setShowContent= f=> f, showContent=undefined, sh
                       color: "white",
                     }}
                   >
-                    <Button
-                      variant="contained"
-                      href="/"
-                      onClick={() => {
-                        endSession();
-                      }}
-                    >
-                      End Session
-                    </Button>
+                    <ButtonGroup>
+                      
+                      {/* Team Name */}
+                      <Button
+                        variant="text"
+                      >
+                        Team: {team}
+                      </Button>
+
+                      {/* End Session */}
+                      <Button
+                        variant="contained"
+                        href="/"
+                        onClick={() => {
+                          endSession();
+                        }}
+                      >
+                        End Session
+                      </Button>
+                    </ButtonGroup>
                   </Box>
                 </>
               )}
@@ -120,24 +138,31 @@ export default function Navbar({setShowContent= f=> f, showContent=undefined, sh
                   <Box
                     sx={{
                       display: "flex",
+                      float: "right",
                       justifyContent: "flex-end",
                       p: 1,
                       m: 1,
-
                       bgcolor: "primary",
                       borderRadius: 1,
                       color: "white",
                     }}
                   >
-                    <Button
-                      variant="outlined"
-                      href="/"
-                      onClick={() => {
-                        endSession();
-                      }}
-                    >
-                      End Session
-                    </Button>
+                    <ButtonGroup>
+                      <Button
+                        variant="text"
+                      >
+                        Team: {team}
+                      </Button>
+                      <Button
+                        variant="contained"
+                        href="/"
+                        onClick={() => {
+                          endSession();
+                        }}
+                      >
+                        End Session
+                      </Button>
+                    </ButtonGroup>
                   </Box>
                 </>
               )}

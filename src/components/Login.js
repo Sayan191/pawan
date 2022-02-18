@@ -7,7 +7,7 @@ import { Grid, Paper, TextField, Button } from "@material-ui/core";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import { Box } from "@material-ui/core";
-import { authenticate, isLoggedIn, loginIn } from "./helper/helper";
+import { authenticate, getTeam, isLoggedIn, loginIn } from "./helper/helper";
 import Navbar from "./Navbar";
 
 const Login = () => {
@@ -68,30 +68,41 @@ const Login = () => {
               <h2>Planning Porker</h2>
             </Box>
           </Grid>
-          <Typography color="text.secondary">
-            <b>Smart Login :</b>
-          </Typography>
-          <Box
-            sx={{
-              padding: 2,
-              display: "flex",
-              flexWrap: "wrap",
-              "& > :not(style)": {
-                m: 1,
-                width: 68,
-                height: 1,
-                // textAlign: "center",
-                paddingTop: 25,
-                // justifyContent: "center",
-                // alignItems: "center",
-                // verticalAlign: "middle",
-                borderRadius: "5px",
-                border: "2px solid #3f51b5",
-              },
-            }}
-          >
-            <Paper elevation={4}></Paper>
-          </Box>
+
+          {/* SMart LOgin */}
+
+          {getTeam() != null && 
+            <>
+              <Typography color="text.secondary">
+                <b>Smart Login :</b>
+              </Typography>
+              <Box
+                sx={{
+                  padding: 2,
+                  display: "flex",
+                  flexWrap: "wrap",
+                  "& > :not(style)": {
+                    m: 1,
+                    width: 68,
+                    height: 30,
+                    textAlign: "center",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: "5px",
+                    border: "2px solid #3f51b5",
+                  },
+                }}
+              >
+                <Paper elevation={4}>
+                  <Typography color="text.secondary">
+                    {getTeam()}
+                  </Typography>
+                </Paper>
+              </Box>
+            </>
+          }
+
+
           <TextField
             onChange={handleChange("user")}
             required

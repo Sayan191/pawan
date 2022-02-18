@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { Box } from "@material-ui/core";
-import { endSession, isAuthenticated, removePoinyts } from "./helper/helper";
+import { endSession, isAuthenticated, removePoinyts} from "./helper/helper";
 
 
 // import { Grid } from "@mui/material";
@@ -20,8 +20,6 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
 }));
-
-const {team} = isAuthenticated().teamDetails;
 
 export default function Navbar({setShowContent= f=> f, showContent=undefined, showSelection=undefined ,setShowSelection=f=>f}) {
   const classes = useStyles();
@@ -110,11 +108,11 @@ export default function Navbar({setShowContent= f=> f, showContent=undefined, sh
                   >
                     <ButtonGroup>
                       
-                      {/* Team Name */}
+                      Team Name
                       <Button
                         variant="text"
                       >
-                        Team: {team}
+                        Team: {isAuthenticated().teamDetails.team}
                       </Button>
 
                       {/* End Session */}
@@ -122,7 +120,7 @@ export default function Navbar({setShowContent= f=> f, showContent=undefined, sh
                         variant="contained"
                         href="/"
                         onClick={() => {
-                          endSession();
+                          endSession(isAuthenticated().teamDetails.team);
                         }}
                       >
                         End Session
@@ -151,13 +149,13 @@ export default function Navbar({setShowContent= f=> f, showContent=undefined, sh
                       <Button
                         variant="text"
                       >
-                        Team: {team}
+                        Team: {isAuthenticated().teamDetails.team}
                       </Button>
                       <Button
                         variant="contained"
                         href="/"
                         onClick={() => {
-                          endSession();
+                          endSession(isAuthenticated().teamDetails.team);
                         }}
                       >
                         End Session

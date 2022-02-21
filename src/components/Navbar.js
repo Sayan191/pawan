@@ -119,7 +119,11 @@ export default function Navbar({
                         variant="contained"
                         href="/"
                         onClick={() => {
-                          endSession(isAuthenticated().teamDetails.team);
+                          let data={
+                            name:isAuthenticated().teamDetails.name,
+                            teamName:isAuthenticated().teamDetails.team,
+                            manager:isAuthenticated().teamDetails.manager}
+                          endSession(data);
                         }}
                       >
                         End Session

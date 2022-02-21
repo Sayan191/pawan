@@ -71,7 +71,7 @@ const Login = () => {
 
           {/* SMart LOgin */}
 
-          {getTeam() != null && 
+          {getTeam() != null && console.log(getTeam().userData) &&
             <>
               <Typography color="text.secondary">
                 <b>Smart Login :</b>
@@ -95,7 +95,7 @@ const Login = () => {
               >
                 <Paper elevation={4}>
                   <Typography color="text.secondary">
-                    {getTeam()}
+                    {getTeam().teamName}
                   </Typography>
                 </Paper>
               </Box>

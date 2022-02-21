@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Paper from "@material-ui/core/Paper";
 import { Box } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-import {getDays} from "../helper/helper";
 
 export default function SimplePaper() {
 

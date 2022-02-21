@@ -49,7 +49,7 @@ export const isLoggedIn = () =>{
 
 export const endSession = (data,next) =>{
     
-    localStorage.setItem("teamName",JSON.stringify(data))
+    localStorage.setItem("userData",JSON.stringify(data))
     if(typeof window !== "undefined"){
         localStorage.removeItem("data")
         localStorage.removeItem("points")
@@ -78,7 +78,7 @@ export const removePoinyts = next =>{
 }
 
 export const getTeam = () =>{
-    if(localStorage.getItem("teamName")){
-        return localStorage.getItem("teamName")
+    if(localStorage.getItem("userData")){
+        return localStorage.getItem("userData")
     }
 }

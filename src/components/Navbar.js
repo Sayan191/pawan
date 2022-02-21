@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { Box } from "@material-ui/core";
-import { endSession, isAuthenticated, removePoinyts } from "./helper/helper";
+import { endSession, getTeam, getUserData, isAuthenticated, removePoinyts } from "./helper/helper";
 
 // import { Grid } from "@mui/material";
 const useStyles = makeStyles((theme) => ({
@@ -118,12 +118,23 @@ export default function Navbar({
                       <Button
                         variant="contained"
                         href="/"
-                        onClick={() => {
+                        onClick={()=> {
+                          //e.preventDefault()
+                          let map=[]
+                          let user=getUserData()
+                          if(user){
+                            for (var i=0;i<user.length;i++){
+                              console.log(user[i])
+                              map.push(user[i])
+                            }  
+                          }                       
+                          
                           let data={
                             name:isAuthenticated().teamDetails.name,
                             teamName:isAuthenticated().teamDetails.team,
                             manager:isAuthenticated().teamDetails.manager}
-                          endSession(data);
+                          map.push(data)
+                          endSession(map);
                         }}
                       >
                         End Session

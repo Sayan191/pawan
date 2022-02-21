@@ -7,10 +7,15 @@ import { Grid, Paper, TextField, Button } from "@material-ui/core";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import { Box } from "@material-ui/core";
-import { authenticate, getTeam, isLoggedIn, loginIn } from "./helper/helper";
+import { authenticate, getUserData, isLoggedIn, loginIn } from "./helper/helper";
 import Navbar from "./Navbar";
 
 const Login = () => {
+
+
+  //smart login array
+  let smart = getUserData()
+
   const paperStyle = {
     padding: 20,
     height: "60vh",
@@ -28,7 +33,6 @@ const Login = () => {
   });
 
   const [checked, setChecked] = useState(false);
-
   const { user, teamName, manager, redirect } = values;
 
   const handleChange = (name) => (event) => {
@@ -71,34 +75,65 @@ const Login = () => {
 
           {/* SMart LOgin */}
 
-          {getTeam() != null &&
+          {getUserData() != null &&
             <>
               <Typography color="text.secondary">
                 <b>Smart Login :</b>
               </Typography>
-              <Box
-                sx={{
-                  padding: 2,
-                  display: "flex",
-                  flexWrap: "wrap",
-                  "& > :not(style)": {
-                    m: 1,
-                    width: 68,
-                    height: 30,
-                    textAlign: "center",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    borderRadius: "5px",
-                    border: "2px solid #3f51b5",
-                  },
-                }}
-              >
-                <Paper elevation={4}>
-                  <Typography color="text.secondary">
-                    {getTeam().teamName}
-                  </Typography>
-                </Paper>
-              </Box>
+
+              {smart.map((index)=>{
+                return (
+                  <Box
+                    key={index}
+                    sx={{
+                      padding: 2,
+                      display: "flex",
+                      flexDirection:"row",
+                      flexWrap: "wrap",
+                      "& > :not(style)": {
+                        m: 1,
+                        width: 68,
+                        height: 30,
+                        textAlign: "center",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        borderRadius: "5px",
+                        border: "2px solid #3f51b5",
+                        cursor: "pointer"
+                      },
+                    }}
+                    // onClick={()=>{
+                    //   //------------------------error setting setting values to state----------------
+                    //   setValue({
+                    //     ...values,
+                    //     user:index.name,
+                    //     teamName:index.teamName,
+                    //     manager:index.manager
+                    //   })
+                    //   console.log(values)
+                    //   loginIn({ user, teamName, manager })
+                    //   .then((data) => {
+                    //     console.log(data);
+                    //     authenticate(data, () => {
+                    //       setValue({
+                    //         user: "",
+                    //         teamName: "",
+                    //         manager: false,
+                    //         redirect: true,
+                    //       });
+                    //     });
+                    //   })
+                    //   .catch((err) => console.log(err));
+                    // }}
+                  >
+                    <Paper elevation={4}>
+                      <Typography color="text.secondary">
+                        {index.teamName}
+                      </Typography>
+                    </Paper>
+                  </Box>
+                )
+              })}
             </>
           }
 

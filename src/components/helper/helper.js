@@ -47,13 +47,14 @@ export const isLoggedIn = () =>{
     }
 }
 
-export const endSession = (data,next) =>{
+export const endSession = (data) =>{
     
     localStorage.setItem("userData",JSON.stringify(data))
     if(typeof window !== "undefined"){
         localStorage.removeItem("data")
-        localStorage.removeItem("points")
-        next()
+        if(localStorage.getItem("points")){
+            localStorage.removeItem("points")
+        }
     }
     return fetch("http://localhost:8000/api/logout",{
         method:"GET"
@@ -77,7 +78,7 @@ export const removePoinyts = next =>{
     }
 }
 
-export const getTeam = () =>{
+export const getUserData = () =>{
     if(localStorage.getItem("userData")){
         return JSON.parse(localStorage.getItem("userData"))
     }

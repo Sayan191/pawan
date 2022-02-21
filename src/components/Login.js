@@ -71,7 +71,7 @@ const Login = () => {
 
           {/* SMart LOgin */}
 
-          {getTeam() != null && console.log(getTeam().userData) &&
+          {getTeam() != null &&
             <>
               <Typography color="text.secondary">
                 <b>Smart Login :</b>

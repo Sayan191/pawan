@@ -79,6 +79,6 @@ export const removePoinyts = next =>{
 
 export const getTeam = () =>{
     if(localStorage.getItem("userData")){
-        return localStorage.getItem("userData")
+        return JSON.parse(localStorage.getItem("userData"))
     }
 }

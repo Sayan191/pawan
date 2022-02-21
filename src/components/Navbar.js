@@ -8,8 +8,7 @@ import Button from "@material-ui/core/Button";
 
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { Box } from "@material-ui/core";
-import { endSession, isAuthenticated, removePoinyts} from "./helper/helper";
-
+import { endSession, isAuthenticated, removePoinyts } from "./helper/helper";
 
 // import { Grid } from "@mui/material";
 const useStyles = makeStyles((theme) => ({
@@ -21,7 +20,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Navbar({setShowContent= f=> f, showContent=undefined, showSelection=undefined ,setShowSelection=f=>f}) {
+export default function Navbar({
+  setShowContent = (f) => f,
+  showContent = undefined,
+  showSelection = undefined,
+  setShowSelection = (f) => f,
+}) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -74,23 +78,22 @@ export default function Navbar({setShowContent= f=> f, showContent=undefined, sh
                       </Button>
 
                       {/* Show Selection */}
-                      <Button 
-                          onClick={() => {
-                            setShowSelection(!showSelection)
-                          }}
+                      <Button
+                        onClick={() => {
+                          setShowSelection(!showSelection);
+                        }}
                       >
                         Show Selection
                       </Button>
 
                       {/* Story POints */}
-                      <Button 
-                          onClick={() => {
-                            setShowContent(!showContent)
-                          }}
-                        >
-                          Story Points
+                      <Button
+                        onClick={() => {
+                          setShowContent(!showContent);
+                        }}
+                      >
+                        Story Points
                       </Button>
-
                     </ButtonGroup>
                   </Box>
 
@@ -107,14 +110,10 @@ export default function Navbar({setShowContent= f=> f, showContent=undefined, sh
                     }}
                   >
                     <ButtonGroup>
-                      
                       Team Name
-                      <Button
-                        variant="text"
-                      >
+                      <Button variant="text">
                         Team: {isAuthenticated().teamDetails.team}
                       </Button>
-
                       {/* End Session */}
                       <Button
                         variant="contained"
@@ -146,9 +145,7 @@ export default function Navbar({setShowContent= f=> f, showContent=undefined, sh
                     }}
                   >
                     <ButtonGroup>
-                      <Button
-                        variant="text"
-                      >
+                      <Button variant="text">
                         Team: {isAuthenticated().teamDetails.team}
                       </Button>
                       <Button

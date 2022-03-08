@@ -7,14 +7,17 @@ import { Grid, Paper, TextField, Button, ClickAwayListener } from "@material-ui/
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import { Box } from "@material-ui/core";
-import { authenticate, getUserData, isLoggedIn, loginIn } from "./helper/helper";
+import {
+  authenticate,
+  getUserData,
+  isLoggedIn,
+  loginIn,
+} from "./helper/helper";
 import Navbar from "./Navbar";
 
 const Login = () => {
-
-
   //smart login array
-  let smart = getUserData()
+  let smart = getUserData();
 
   const paperStyle = {
     padding: 20,
@@ -55,7 +58,10 @@ const Login = () => {
       return <Navigate to="/planningpoker" />;
     }
   };
+  /*
+it checks whether logged-in or not if true redirect to the planning poker page
 
+*/
   const loggedIn = () => {
     if (isLoggedIn()) {
       return <Navigate to="/planningpoker" />;
@@ -84,13 +90,13 @@ const Login = () => {
 
           {/* SMart LOgin */}
 
-          {getUserData() != null &&
+          {getUserData() != null && (
             <>
               <Typography color="text.secondary">
                 <b>Smart Login :</b>
               </Typography>
 
-              {smart.map((index)=>{
+              {smart.map((index) => {
                 return (
                   <Box
                     key={index}
@@ -98,7 +104,7 @@ const Login = () => {
                     sx={{
                       padding: 2,
                       display: "flex",
-                      flexDirection:"row",
+                      flexDirection: "row",
                       flexWrap: "wrap",
                       "& > :not(style)": {
                         m: 1,
@@ -109,8 +115,9 @@ const Login = () => {
                         alignItems: "center",
                         borderRadius: "5px",
                         border: "2px solid #3f51b5",
-                        cursor: "pointer"
+                        cursor: "pointer",
                       },
+<<<<<<< HEAD
                     }}
                     onClick={()=>{
                       //------------------------error setting setting values to state----------------
@@ -129,6 +136,36 @@ const Login = () => {
                       })
                       .catch((err) => console.log(err));
                     }}
+=======
+                    }} /*
+                    after logged or not the values get set and on clicking the button the it takes the data from 
+                    local storage
+                    */
+                    // onClick={() => {
+                    //------------------------error setting setting values to state----------------
+                    // setValue({
+                    //   // ...values,
+                    //   user: index.name,
+                    //   teamName: index.teamName,
+                    //   manager: index.manager,
+                    //   redirect: true,
+                    // });
+                    // console.log(values);
+                    //   loginIn(index.name, index.teamName, index.manager)
+                    //     .then((data) => {
+                    //       console.log(data);
+                    //       authenticate(data, () => {
+                    //         setValue({
+                    //           user: "",
+                    //           teamName: "",
+                    //           manager: false,
+                    //           redirect: true,
+                    //         });
+                    //       });
+                    //     })
+                    //     .catch((err) => console.log(err));
+                    // }}
+>>>>>>> aa33177a6bee6da0edeb0259875fdcd738ba9cd7
                   >
                     <Paper elevation={4}>
                       <Typography color="text.secondary">
@@ -136,11 +173,10 @@ const Login = () => {
                       </Typography>
                     </Paper>
                   </Box>
-                )
+                );
               })}
             </>
-          }
-
+          )}
 
           <TextField
             onChange={handleChange("user")}

@@ -3,7 +3,7 @@ import React, { Fragment, useState } from "react";
 import { Navigate } from "react-router-dom";
 
 import Typography from "@material-ui/core/Typography";
-import { Grid, Paper, TextField, Button } from "@material-ui/core";
+import { Grid, Paper, TextField, Button, ClickAwayListener } from "@material-ui/core";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import { Box } from "@material-ui/core";
@@ -26,8 +26,8 @@ const Login = () => {
   const btnstyle = { margin: "8px 0" };
 
   const [values, setValue] = useState({
-    user: "",
-    teamName: "",
+    user: '',
+    teamName: '',
     manager: false,
     redirect: false,
   });
@@ -39,8 +39,17 @@ const Login = () => {
     setValue({ ...values, [event.target.name]: event.target.value });
   };
 
+  const click=(name)=> (event)=>{
+    //console.log(index)
+    setValue({
+      ...values,
+      user:event.target.value.name,
+      teamName:event.target.value.teamName,
+      manager:event.target.value.manager
+    })
+    console.log(values)
+  }
   //react redirect function
-
   const reDirect = () => {
     if (redirect) {
       return <Navigate to="/planningpoker" />;
@@ -85,6 +94,7 @@ const Login = () => {
                 return (
                   <Box
                     key={index}
+                    value={index}
                     sx={{
                       padding: 2,
                       display: "flex",
@@ -102,29 +112,23 @@ const Login = () => {
                         cursor: "pointer"
                       },
                     }}
-                    // onClick={()=>{
-                    //   //------------------------error setting setting values to state----------------
-                    //   setValue({
-                    //     ...values,
-                    //     user:index.name,
-                    //     teamName:index.teamName,
-                    //     manager:index.manager
-                    //   })
-                    //   console.log(values)
-                    //   loginIn({ user, teamName, manager })
-                    //   .then((data) => {
-                    //     console.log(data);
-                    //     authenticate(data, () => {
-                    //       setValue({
-                    //         user: "",
-                    //         teamName: "",
-                    //         manager: false,
-                    //         redirect: true,
-                    //       });
-                    //     });
-                    //   })
-                    //   .catch((err) => console.log(err));
-                    // }}
+                    onClick={()=>{
+                      //------------------------error setting setting values to state----------------
+                      click() 
+                      loginIn({user,teamName,manager})
+                      .then((data) => {
+                        console.log(data);
+                        authenticate(data, () => {
+                          setValue({
+                            user: "",
+                            teamName: "",
+                            manager: false,
+                            redirect: true,
+                          });
+                        });
+                      })
+                      .catch((err) => console.log(err));
+                    }}
                   >
                     <Paper elevation={4}>
                       <Typography color="text.secondary">

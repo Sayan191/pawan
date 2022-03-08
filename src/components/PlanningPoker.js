@@ -1,4 +1,6 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
+
 import Paper from "@material-ui/core/Paper";
 import { Box } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
@@ -22,8 +24,14 @@ const PlanningPoker = () => {
   }
   const cardStyle = {
     color: "red",
-    fontSize: 70,
-    marginBottom:1000
+    fontSize: 55,
+  };
+  const firstName = {
+    paddingTop: 0,
+    color: "black",
+    fontSize: 24,
+    marginTop: 1,
+    marginLeft: 60,
   };
 
   return (
@@ -43,8 +51,8 @@ const PlanningPoker = () => {
               flexWrap: "wrap",
               "& > :not(style)": {
                 m: 1,
-                width: 128,
-                height: 105,
+                width: 118,
+                height: 90,
                 textAlign: "center",
                 paddingTop: 65,
                 justifyContent: "center",
@@ -56,21 +64,21 @@ const PlanningPoker = () => {
             }}
           >
             <Paper elevation={18}>
-              <Typography
-                sx={{ fontSize: 22 }}
-                color="text.secondary"
-              >
+              <Typography color="text.secondary">
                 {Selection == false ? (
                   <b> Planning Porker</b>
                 ) : (
-                  <Typography style={cardStyle}>{points}</Typography>
+                  <Typography style={cardStyle} variant="h3" gutterBottom>
+                    {points}
+                  </Typography>
                 )}
-
                 {/* { showSelection == true && <b> {points} </b> && setShowSelection(false)} */}
               </Typography>
             </Paper>
           </Box>
-          <Typography> {isAuthenticated().teamDetails.name} </Typography>
+          <Typography style={firstName}>
+            {isAuthenticated().teamDetails.name}
+          </Typography>
         </>
       )}
       {isAuthenticated() && isAuthenticated().teamDetails.manager == false && (

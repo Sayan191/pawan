@@ -8,7 +8,13 @@ import Button from "@material-ui/core/Button";
 
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { Box } from "@material-ui/core";
-import { endSession, getTeam, getUserData, isAuthenticated, removePoinyts } from "./helper/helper";
+import {
+  endSession,
+  getTeam,
+  getUserData,
+  isAuthenticated,
+  removePoinyts,
+} from "./helper/helper";
 
 // import { Grid } from "@mui/material";
 const useStyles = makeStyles((theme) => ({
@@ -44,11 +50,7 @@ export default function Navbar({
                   borderRadius: 1,
                   color: "white",
                 }}
-              >
-                <Button variant="contained" href="/">
-                  Help
-                </Button>
-              </Box>
+              ></Box>
             )}
             {isAuthenticated() &&
               isAuthenticated().teamDetails.manager == true && (
@@ -118,22 +120,23 @@ export default function Navbar({
                       <Button
                         variant="contained"
                         href="/"
-                        onClick={()=> {
+                        onClick={() => {
                           //e.preventDefault()
-                          let map=[]
-                          let user=getUserData()
-                          if(user){
-                            for (var i=0;i<user.length;i++){
-                              console.log(user[i])
-                              map.push(user[i])
-                            }  
-                          }                       
-                          
-                          let data={
-                            name:isAuthenticated().teamDetails.name,
-                            teamName:isAuthenticated().teamDetails.team,
-                            manager:isAuthenticated().teamDetails.manager}
-                          map.push(data)
+                          let map = [];
+                          let user = getUserData();
+                          if (user) {
+                            for (var i = 0; i < user.length; i++) {
+                              console.log(user[i]);
+                              map.push(user[i]);
+                            }
+                          }
+
+                          let data = {
+                            name: isAuthenticated().teamDetails.name,
+                            teamName: isAuthenticated().teamDetails.team,
+                            manager: isAuthenticated().teamDetails.manager,
+                          };
+                          map.push(data);
                           endSession(map);
                         }}
                       >
@@ -167,7 +170,23 @@ export default function Navbar({
                         variant="contained"
                         href="/"
                         onClick={() => {
-                          endSession(isAuthenticated().teamDetails.team);
+                          //e.preventDefault()
+                          let map = [];
+                          let user = getUserData();
+                          if (user) {
+                            for (var i = 0; i < user.length; i++) {
+                              console.log(user[i]);
+                              map.push(user[i]);
+                            }
+                          }
+
+                          let data = {
+                            name: isAuthenticated().teamDetails.name,
+                            teamName: isAuthenticated().teamDetails.team,
+                            manager: isAuthenticated().teamDetails.manager,
+                          };
+                          map.push(data);
+                          endSession(map);
                         }}
                       >
                         End Session

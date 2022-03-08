@@ -28,9 +28,9 @@ export default function SimplePaper() {
         <Box
           className={classes.root}
           sx={{
-            margin: 0,
-            paddingTop: 10,
-            paddingLeft: 80,
+            marginTop: 1,
+            paddingTop: 2,
+            paddingLeft: 90,
             display: "flex",
             flexWrap: "wrap",
             "& > :not(style)": {
@@ -58,7 +58,7 @@ export default function SimplePaper() {
                     localStorage.setItem("points", JSON.stringify(points));
                   }}
                 >
-                  <Paper elevation={1000}>
+                  <Paper elevation={0}>
                     <Typography style={cardStyle} gutterBottom>
                       {points}
                     </Typography>

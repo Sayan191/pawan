@@ -79,7 +79,7 @@ it checks whether logged-in or not if true redirect to the planning poker page
             </Box>
           </Grid>
           
-          
+          { /* If error occurs this part gets displayed instantly */}
           <Typography 
             sx={{
               display: (error)=>(error != "" ? "" : "none"),
@@ -186,9 +186,10 @@ it checks whether logged-in or not if true redirect to the planning poker page
               loginIn({ user, teamName, manager })
                 .then((data) => {
                   console.log(data);
+
+                  // if error occurs we store the error value otherwise continue login
                   if(data.error){
                     setValue({...values,error:data.error})
-                    console.log(error)
                   }
                   else{
                     authenticate(data, () => {

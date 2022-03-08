@@ -35,6 +35,12 @@ exports.login = (req, res) => {
         }
         // if team exist ..........
         else{
+
+            // first check for if teamNane is same as the req one
+            // then check for manager if it has manager or not
+            // then check if the userName is same or not 
+            // if same then continue creating loin session 
+            // otherwise return error 
             if(req.body.manager == true){
                 for(var i=0;i<team.length;i++ ){
                     if(team[i]["teamName"] == teamName){

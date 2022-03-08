@@ -3,7 +3,7 @@ import React, { Fragment, useState } from "react";
 import { Navigate } from "react-router-dom";
 
 import Typography from "@material-ui/core/Typography";
-import { Grid, Paper, TextField, Button, ClickAwayListener } from "@material-ui/core";
+import { Grid, Paper, TextField, Button } from "@material-ui/core";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import { Box } from "@material-ui/core";
@@ -29,30 +29,22 @@ const Login = () => {
   const btnstyle = { margin: "8px 0" };
 
   const [values, setValue] = useState({
-    user: '',
-    teamName: '',
+    user: "",
+    teamName: "",
     manager: false,
+    error:"",
     redirect: false,
   });
 
   const [checked, setChecked] = useState(false);
-  const { user, teamName, manager, redirect } = values;
+  const { user, teamName, manager, error, redirect } = values;
 
   const handleChange = (name) => (event) => {
     setValue({ ...values, [event.target.name]: event.target.value });
   };
 
-  const click=(name)=> (event)=>{
-    //console.log(index)
-    setValue({
-      ...values,
-      user:event.target.value.name,
-      teamName:event.target.value.teamName,
-      manager:event.target.value.manager
-    })
-    console.log(values)
-  }
   //react redirect function
+
   const reDirect = () => {
     if (redirect) {
       return <Navigate to="/planningpoker" />;
@@ -60,7 +52,6 @@ const Login = () => {
   };
   /*
 it checks whether logged-in or not if true redirect to the planning poker page
-
 */
   const loggedIn = () => {
     if (isLoggedIn()) {
@@ -87,6 +78,15 @@ it checks whether logged-in or not if true redirect to the planning poker page
               <h2>Planning Porker</h2>
             </Box>
           </Grid>
+          
+          
+          <Typography 
+            sx={{
+              display: (error)=>(error != "" ? "" : "none"),
+              color:"text.secondary"
+          }}>
+                    {error}
+            </Typography>
 
           {/* SMart LOgin */}
 
@@ -100,7 +100,6 @@ it checks whether logged-in or not if true redirect to the planning poker page
                 return (
                   <Box
                     key={index}
-                    value={index}
                     sx={{
                       padding: 2,
                       display: "flex",
@@ -117,26 +116,6 @@ it checks whether logged-in or not if true redirect to the planning poker page
                         border: "2px solid #3f51b5",
                         cursor: "pointer",
                       },
-<<<<<<< HEAD
-                    }}
-                    onClick={()=>{
-                      //------------------------error setting setting values to state----------------
-                      click() 
-                      loginIn({user,teamName,manager})
-                      .then((data) => {
-                        console.log(data);
-                        authenticate(data, () => {
-                          setValue({
-                            user: "",
-                            teamName: "",
-                            manager: false,
-                            redirect: true,
-                          });
-                        });
-                      })
-                      .catch((err) => console.log(err));
-                    }}
-=======
                     }} /*
                     after logged or not the values get set and on clicking the button the it takes the data from 
                     local storage
@@ -165,7 +144,6 @@ it checks whether logged-in or not if true redirect to the planning poker page
                     //     })
                     //     .catch((err) => console.log(err));
                     // }}
->>>>>>> aa33177a6bee6da0edeb0259875fdcd738ba9cd7
                   >
                     <Paper elevation={4}>
                       <Typography color="text.secondary">
@@ -208,16 +186,23 @@ it checks whether logged-in or not if true redirect to the planning poker page
               loginIn({ user, teamName, manager })
                 .then((data) => {
                   console.log(data);
-                  authenticate(data, () => {
-                    setValue({
-                      user: "",
-                      teamName: "",
-                      manager: false,
-                      redirect: true,
+                  if(data.error){
+                    setValue({...values,error:data.error})
+                    console.log(error)
+                  }
+                  else{
+                    authenticate(data, () => {
+                      setValue({
+                        user: "",
+                        teamName: "",
+                        error:"",
+                        manager: false,
+                        redirect: true,
+                      });
                     });
-                  });
+                  }
                 })
-                .catch((err) => console.log(err));
+                .catch((error) => setValue({...values,error:error}));
             }}
           >
             JOIN SESSION

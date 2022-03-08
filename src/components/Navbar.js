@@ -127,7 +127,11 @@ export default function Navbar({
                           if (user) {
                             for (var i = 0; i < user.length; i++) {
                               console.log(user[i]);
-                              map.push(user[i]);
+                              if(map.length < 5) {
+                                if(!map.includes(user[i])){
+                                  map.push(user[i]);
+                                }
+                              }
                             }
                           }
 

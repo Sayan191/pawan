@@ -4,9 +4,6 @@ var jwt = require('jsonwebtoken')
 
 exports.login = (req, res) => {
     const { teamName } = req.body;
-    
-    //isme kaise store hoga team ka value agar return hua to
-    var result;
 
     Teams.find({'teamName':teamName},(err,team)=>{
         //if team doesnt exist...............
@@ -38,6 +35,21 @@ exports.login = (req, res) => {
         }
         // if team exist ..........
         else{
+            if(req.body.manager == true){
+                for(var i=0;i<team.length;i++ ){
+                    if(team[i]["teamName"] == teamName){
+                        if(team[i]["manager"] == true){
+                            if(team[i]["user"] != req.body.user){
+                                return res.status(400).send({
+                                    error: team[i]["user"]+" is already the manager for the current session"
+                                })
+                            }
+                        }
+                    } 
+                }
+            }
+
+
             var flag = false;
             for(var i=0; i<team.length;i++){
                 if(team[i]["user"] == req.body.user){

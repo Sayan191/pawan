@@ -5,7 +5,7 @@ if data gets saved in DB succesfully then it return the json response or else er
 */
 
 export const loginIn = (data) => {
-  return fetch("http://localhost:8000/api/login", {
+  return fetch(`${process.env.REACT_URL}/login`, {
     method: "POST",
     headers: {
       Accept: "*/*",
@@ -82,7 +82,7 @@ export const endSession = (data) => {
       localStorage.removeItem("points");
     }
   }
-  return fetch("http://localhost:8000/api/logout", {
+  return fetch(`${process.env.REACT_URL}/logout`, {
     method: "GET",
   })
     .then((response) => {

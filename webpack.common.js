@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 const path = require("path");
+const Dotenv = require('dotenv-webpack')
 
 module.exports = {
   entry: "./index.js",
@@ -30,4 +31,8 @@ module.exports = {
       { test: /\.css$/, use: ["style-loader", "css-loader"] },
     ],
   },
+
+  plugins:[
+    new Dotenv()
+  ]
 };
